@@ -1,0 +1,112 @@
+Postfix: ab|
+Steps:
+Token: a, Stack: [], Output: ['a']
+Token: |, Stack: ['|'], Output: ['a']
+Token: b, Stack: ['|'], Output: ['a', 'b']
+Stack emptying, Stack: [], Output: ['a', 'b', '|']
+
+Postfix: abc|d*
+Steps:
+Token: a, Stack: [], Output: ['a']
+Token: (, Stack: ['('], Output: ['a']
+Token: b, Stack: ['('], Output: ['a', 'b']
+Token: |, Stack: ['(', '|'], Output: ['a', 'b']
+Token: c, Stack: ['(', '|'], Output: ['a', 'b', 'c']
+Token: ), Stack: [], Output: ['a', 'b', 'c', '|']
+Token: *, Stack: ['*'], Output: ['a', 'b', 'c', '|']
+Token: d, Stack: ['*'], Output: ['a', 'b', 'c', '|', 'd']
+Stack emptying, Stack: [], Output: ['a', 'b', 'c', '|', 'd', '*']
+
+Postfix: ab?c+
+Steps:
+Token: a, Stack: [], Output: ['a']
+Token: ?, Stack: ['?'], Output: ['a']
+Token: b, Stack: ['?'], Output: ['a', 'b']
+Token: +, Stack: ['+'], Output: ['a', 'b', '?']
+Token: c, Stack: ['+'], Output: ['a', 'b', '?', 'c']
+Stack emptying, Stack: [], Output: ['a', 'b', '?', 'c', '+']
+
+Postfix: abc|d*+
+Steps:
+Token: a, Stack: [], Output: ['a']
+Token: (, Stack: ['('], Output: ['a']
+Token: b, Stack: ['('], Output: ['a', 'b']
+Token: |, Stack: ['(', '|'], Output: ['a', 'b']
+Token: c, Stack: ['(', '|'], Output: ['a', 'b', 'c']
+Token: ), Stack: [], Output: ['a', 'b', 'c', '|']
+Token: *, Stack: ['*'], Output: ['a', 'b', 'c', '|']
+Token: d, Stack: ['*'], Output: ['a', 'b', 'c', '|', 'd']
+Token: +, Stack: ['+'], Output: ['a', 'b', 'c', '|', 'd', '*']
+Stack emptying, Stack: [], Output: ['a', 'b', 'c', '|', 'd', '*', '+']
+
+Postfix: abc|d?*
+Steps:
+Token: a, Stack: [], Output: ['a']
+Token: (, Stack: ['('], Output: ['a']
+Token: b, Stack: ['('], Output: ['a', 'b']
+Token: |, Stack: ['(', '|'], Output: ['a', 'b']
+Token: c, Stack: ['(', '|'], Output: ['a', 'b', 'c']
+Token: ), Stack: [], Output: ['a', 'b', 'c', '|']
+Token: ?, Stack: ['?'], Output: ['a', 'b', 'c', '|']
+Token: d, Stack: ['?'], Output: ['a', 'b', 'c', '|', 'd']
+Token: *, Stack: ['*'], Output: ['a', 'b', 'c', '|', 'd', '?']
+Stack emptying, Stack: [], Output: ['a', 'b', 'c', '|', 'd', '?', '*']
+
+Postfix: a\.b.
+Steps:
+Token: a, Stack: [], Output: ['a']
+Token: \, Stack: [], Output: ['a', '\\']
+Token: ., Stack: ['.'], Output: ['a', '\\']
+Token: ., Stack: ['.'], Output: ['a', '\\', '.']
+Token: b, Stack: ['.'], Output: ['a', '\\', '.', 'b']
+Stack emptying, Stack: [], Output: ['a', '\\', '.', 'b', '.']
+
+Postfix: a\bc\|d
+Steps:
+Token: a, Stack: [], Output: ['a']
+Token: \, Stack: [], Output: ['a', '\\']
+Token: (, Stack: ['('], Output: ['a', '\\']
+Token: b, Stack: ['('], Output: ['a', '\\', 'b']
+Token: |, Stack: ['(', '|'], Output: ['a', '\\', 'b']
+Token: c, Stack: ['(', '|'], Output: ['a', '\\', 'b', 'c']
+Token: \, Stack: ['(', '|'], Output: ['a', '\\', 'b', 'c', '\\']
+Token: ), Stack: [], Output: ['a', '\\', 'b', 'c', '\\', '|']
+Token: d, Stack: [], Output: ['a', '\\', 'b', 'c', '\\', '|', 'd']
+
+Postfix: abc|d*e|
+Steps:
+Token: a, Stack: [], Output: ['a']
+Token: (, Stack: ['('], Output: ['a']
+Token: b, Stack: ['('], Output: ['a', 'b']
+Token: |, Stack: ['(', '|'], Output: ['a', 'b']
+Token: c, Stack: ['(', '|'], Output: ['a', 'b', 'c']
+Token: ), Stack: [], Output: ['a', 'b', 'c', '|']
+Token: *, Stack: ['*'], Output: ['a', 'b', 'c', '|']
+Token: d, Stack: ['*'], Output: ['a', 'b', 'c', '|', 'd']
+Token: |, Stack: ['|'], Output: ['a', 'b', 'c', '|', 'd', '*']
+Token: e, Stack: ['|'], Output: ['a', 'b', 'c', '|', 'd', '*', 'e']
+Stack emptying, Stack: [], Output: ['a', 'b', 'c', '|', 'd', '*', 'e', '|']
+
+Postfix: a\bc\|d*
+Steps:
+Token: a, Stack: [], Output: ['a']
+Token: \, Stack: [], Output: ['a', '\\']
+Token: (, Stack: ['('], Output: ['a', '\\']
+Token: b, Stack: ['('], Output: ['a', '\\', 'b']
+Token: |, Stack: ['(', '|'], Output: ['a', '\\', 'b']
+Token: c, Stack: ['(', '|'], Output: ['a', '\\', 'b', 'c']
+Token: \, Stack: ['(', '|'], Output: ['a', '\\', 'b', 'c', '\\']
+Token: ), Stack: [], Output: ['a', '\\', 'b', 'c', '\\', '|']
+Token: *, Stack: ['*'], Output: ['a', '\\', 'b', 'c', '\\', '|']
+Token: d, Stack: ['*'], Output: ['a', '\\', 'b', 'c', '\\', '|', 'd']
+Stack emptying, Stack: [], Output: ['a', '\\', 'b', 'c', '\\', '|', 'd', '*']
+
+Postfix: ab|c
+Steps:
+Token: (, Stack: ['('], Output: []
+Token: a, Stack: ['('], Output: ['a']
+Token: |, Stack: ['(', '|'], Output: ['a']
+Token: b, Stack: ['(', '|'], Output: ['a', 'b']
+Token: ), Stack: [], Output: ['a', 'b', '|']
+Token: c, Stack: [], Output: ['a', 'b', '|', 'c']
+
