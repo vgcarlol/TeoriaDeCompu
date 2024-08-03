@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio No. 2: Lema de Arden</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    h1, h2, h3 {
+      color: #333;
+    }
+    h1 {
+      border-bottom: 2px solid #333;
+      padding-bottom: 10px;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    h3 {
+      margin-top: 20px;
+    }
+    ul, ol {
+      margin-left: 20px;
+    }
+    p, li {
+      margin-bottom: 10px;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 20px auto;
+    }
+    .equation {
+      background: #fff;
+      padding: 10px;
+      border: 1px solid #ddd;
+      margin: 10px 0;
+      border-radius: 4px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ejercicio No. 2: Utilización del Lema de Arden para Encontrar el Lenguaje Generado por un Autómata Finito</h1>
+    
+    <img src="image.png" alt="Autómata Finito">
+
+    <h2>Procedimiento</h2>
+
+    <h3>Paso 1: Identificación de Estados y Transiciones</h3>
+    <p>El autómata finito dado tiene los siguientes estados y transiciones:</p>
+    <ul>
+      <li>Estados: \( q_0, q_1, q_2, q_3, q_4, q_5, q_6, q_7, q_8, q_9, q_{10}, q_{11}, q_{12}, q_{13}, q_{14}, q_{15}, q_{16}, q_{17} \)</li>
+    </ul>
+
+    <h3>Paso 2: Escritura de Ecuaciones de Transición</h3>
+    <p>Para cada estado \( q_i \), escribimos una ecuación que representa las transiciones hacia ese estado en términos de expresiones regulares:</p>
+
+    <ul>
+      <li>\( q_0 = \epsilon q_1 + \epsilon q_2 + \epsilon q_3 \)</li>
+      <li>\( q_1 = 0 q_4 \)</li>
+      <li>\( q_2 = \epsilon q_4 \)</li>
+      <li>\( q_3 = \epsilon q_4 \)</li>
+      <li>\( q_4 = \epsilon q_5 \)</li>
+      <li>\( q_5 = \epsilon q_6 \)</li>
+      <li>\( q_6 = 1 q_7 + \epsilon q_8 \)</li>
+      <li>\( q_7 = \epsilon q_{11} \)</li>
+      <li>\( q_8 = \epsilon q_9 \)</li>
+      <li>\( q_9 = \epsilon q_{10} \)</li>
+      <li>\( q_{10} = \epsilon q_{11} \)</li>
+      <li>\( q_{11} = \epsilon q_{12} \)</li>
+      <li>\( q_{12} = \epsilon q_{14} \)</li>
+      <li>\( q_{13} = \epsilon q_{14} \)</li>
+      <li>\( q_{14} = \epsilon q_{15} + \epsilon q_{16} + \epsilon q_{13} + 0 q_{15} \)</li>
+      <li>\( q_{15} = \epsilon q_{16} + \epsilon q_{17} \)</li>
+      <li>\( q_{16} = 0 q_{14} \)</li>
+      <li>\( q_{17} = \epsilon \)</li>
+    </ul>
+
+    <h3>Paso 3: Resolución de las Ecuaciones usando el Lema de Arden</h3>
+    <ol>
+      <li>Para \( q_{17} \):
+        <div class="equation">
+          \( q_{17} = \epsilon \)
+        </div>
+      </li>
+      <li>Para \( q_{16} \):
+        <div class="equation">
+          \( q_{16} = 0 q_{14} q_{16} + \epsilon q_{17} \)
+        </div>
+        Aplicando el Lema de Arden:
+        <div class="equation">
+          \( q_{16} = (0 q_{14})^* \epsilon \)
+        </div>
+      </li>
+      <li>Para \( q_{15} \):
+        <div class="equation">
+          \( q_{15} = \epsilon q_{16} + \epsilon q_{17} \)
+        </div>
+        <div class="equation">
+          \( q_{15} = \epsilon (0 q_{14})^* \epsilon + \epsilon \)
+        </div>
+        <div class="equation">
+          \( q_{15} = \epsilon (0 q_{14})^* \epsilon \)
+        </div>
+      </li>
+      <li>Para \( q_{14} \):
+        <div class="equation">
+          \( q_{14} = \epsilon q_{15} + \epsilon q_{16} + \epsilon q_{13} + 0 q_{15} \)
+        </div>
+        <div class="equation">
+          \( q_{14} = \epsilon (\epsilon (0 q_{14})^* \epsilon + \epsilon) + \epsilon (0 q_{14})^* \epsilon + \epsilon q_{13} + 0 (\epsilon (0 q_{14})^* \epsilon + \epsilon) \)
+        </div>
+        Simplificando:
+        <div class="equation">
+          \( q_{14} = \epsilon^2 (0 q_{14})^* \epsilon + \epsilon^2 + \epsilon (0 q_{14})^* \epsilon + \epsilon q_{13} + 0 \epsilon (0 q_{14})^* \epsilon + 0 \epsilon \)
+        </div>
+        <div class="equation">
+          \( q_{14} = \epsilon^2 (0 q_{14})^* \epsilon + \epsilon^2 + \epsilon (0 q_{14})^* \epsilon + \epsilon q_{13} \)
+        </div>
+      </li>
+    </ol>
+
+    <h3>Paso 4: Sustituciones Iterativas</h3>
+
+    <ul>
+      <li>Para \( q_{12} \) y \( q_{13} \):
+        <div class="equation">
+          \( q_{12} = \epsilon q_{14} \)
+        </div>
+        <div class="equation">
+          \( q_{13} = \epsilon q_{14} \)
+        </div>
+      </li>
+      <li>Para \( q_{11} \):
+        <div class="equation">
+          \( q_{11} = \epsilon q_{12} \)
+        </div>
+        <div class="equation">
+          \( q_{11} = \epsilon (\epsilon q_{14}) \)
+        </div>
+        <div class="equation">
+          \( q_{11} = \epsilon^2 q_{14} \)
+        </div>
+      </li>
+      <li>Para \( q_{10} \):
+        <div class="equation">
+          \( q_{10} = \epsilon q_{11} \)
+        </div>
+        <div class="equation">
+          \( q_{10} = \epsilon (\epsilon^2 q_{14}) \)
+        </div>
+        <div class="equation">
+          \( q_{10} = \epsilon^3 q_{14} \)
+        </div>
+      </li>
+      <li>Para \( q_{9} \):
+        <div class="equation">
+          \( q_{9} = \epsilon q_{10} \)
+        </div>
+        <div class="equation">
+          \( q_{9} = \epsilon (\epsilon^3 q_{14}) \)
+        </div>
+        <div class="equation">
+          \( q_{9} = \epsilon^4 q_{14} \)
+        </div>
+      </li>
+      <li>Para \( q_{8} \):
+        <div class="equation">
+          \( q_{8} = \epsilon q_{9} \)
+        </div>
+        <div class="equation">
+          \( q_{8} = \epsilon (\epsilon^4 q_{14}) \)
+        </div>
+        <div class="equation">
+          \( q_{8} = \epsilon^5 q_{14} \)
+        </div>
+      </li>
+      <li>Para \( q_{7} \):
+        <div class="equation">
+          \( q_{7} = \epsilon q_{11} \)
+        </div>
+        <div class="equation">
+          \( q_{7} = \epsilon (\epsilon^2 q_{14}) \)
+        </div>
+        <div class="equation">
+          \( q_{7} = \epsilon^3 q_{14} \)
+        </div>
+      </li>
+      <li>Para \( q_{6} \):
+        <div class="equation">
+          \( q_{6} = 1 q_{7} + \epsilon q_{8} \)
+        </div>
+        <div class="equation">
+          \( q_{6} = 1 (\epsilon^3 q_{14}) + \epsilon (\epsilon^5 q_{14}) \)
+        </div>
+        <div class="equation">
+          \( q_{6} = \epsilon^3 q_{14} + \epsilon^6 q_{14} \)
+        </div>
+      </li>
+      <li>Para \( q_{5} \):
+        <div class="equation">
+          \( q_{5} = \epsilon q_{6} \)
+        </div>
+        <div class="equation">
+          \( q_{5} = \epsilon (\epsilon^3 q_{14} + \epsilon^6 q_{14}) \)
+        </div>
+        <div class="equation">
+          \( q_{5} = \epsilon^4 q_{14} + \epsilon^7 q_{14} \)
+        </div>
+      </li>
+      <li>Para \( q_{4} \):
+        <div class="equation">
+          \( q_{4} = \epsilon q_{5} \)
+        </div>
+        <div class="equation">
+          \( q_{4} = \epsilon (\epsilon^4 q_{14} + \epsilon^7 q_{14}) \)
+        </div>
+        <div class="equation">
+          \( q_{4} = \epsilon^5 q_{14} + \epsilon^8 q_{14} \)
+        </div>
+      </li>
+      <li>Para \( q_{3} \):
+        <div class="equation">
+          \( q_{3} = \epsilon q_{4} \)
+        </div>
+        <div class="equation">
+          \( q_{3} = \epsilon (\epsilon^5 q_{14} + \epsilon^8 q_{14}) \)
+        </div>
+        <div class="equation">
+          \( q_{3} = \epsilon^6 q_{14} + \epsilon^9 q_{14} \)
+        </div>
+      </li>
+      <li>Para \( q_{2} \):
+        <div class="equation">
+          \( q_{2} = \epsilon q_{4} \)
+        </div>
+        <div class="equation">
+          \( q_{2} = \epsilon (\epsilon^5 q_{14} + \epsilon^8 q_{14}) \)
+        </div>
+        <div class="equation">
+          \( q_{2} = \epsilon^6 q_{14} + \epsilon^9 q_{14} \)
+        </div>
+      </li>
+      <li>Para \( q_{1} \):
+        <div class="equation">
+          \( q_{1} = 0 q_{4} \)
+        </div>
+        <div class="equation">
+          \( q_{1} = 0 (\epsilon^5 q_{14} + \epsilon^8 q_{14}) \)
+        </div>
+        <div class="equation">
+          \( q_{1} = 0 \epsilon^5 q_{14} + 0 \epsilon^8 q_{14} \)
+        </div>
+      </li>
+      <li>Para \( q_{0} \):
+        <div class="equation">
+          \( q_{0} = \epsilon q_{1} + \epsilon q_{2} + \epsilon q_{3} \)
+        </div>
+        <div class="equation">
+          \( q_{0} = \epsilon (0 \epsilon^5 q_{14} + 0 \epsilon^8 q_{14}) + \epsilon (ε^6 q_{14} + \epsilon^9 q_{14}) + \epsilon (\epsilon^6 q_{14} + \epsilon^9 q_{14}) \)
+        </div>
+        Simplificando finalmente:
+        <div class="equation">
+          \( q_{0} = \epsilon (0 \epsilon^5 q_{14} + 0 \epsilon^8 q_{14}) + \epsilon (2 \epsilon^6 q_{14} + 2 \epsilon^9 q_{14}) \)
+        </div>
+      </li>
+    </ul>
+
+    <h3>Expresión Regular Final</h3>
+
+    <div class="equation">
+      \( q_{0} = \epsilon (0 \epsilon^5 q_{14} + 0 \epsilon^8 q_{14}) + \epsilon (2 \epsilon^6 q_{14} + 2 \epsilon^9 q_{14}) \)
+    </div>
+
+    <h3>Conclusión</h3>
+    <p>El procedimiento para encontrar la expresión regular utilizando el Lema de Arden implica escribir las ecuaciones de transición para cada estado, resolverlas iterativamente de los estados finales hacia los estados iniciales y simplificar las expresiones resultantes.</p>
+  </div>
+</body>
+</html>

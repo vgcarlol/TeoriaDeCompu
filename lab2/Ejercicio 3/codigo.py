@@ -81,3 +81,5 @@ def process_file(input_file, output_file):
 input_file = 'C:/Users/user/Desktop/Github/TeoriaDeCompu/lab2/Ejercicio 3/input_expressions.txt'
 output_file = 'C:/Users/user/Desktop/Github/TeoriaDeCompu/lab2/Ejercicio 3/output_postfix.txt'
 process_file(input_file, output_file)
+
+
